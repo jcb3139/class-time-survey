@@ -1,0 +1,14 @@
+{
+  "name": "class-time-survey-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:apply:local": "wrangler d1 execute class-time-survey --local --file=schema.sql",
+    "db:apply:remote": "wrangler d1 execute class-time-survey --remote --file=schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.92.0"
+  }
+}

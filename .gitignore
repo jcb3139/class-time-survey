@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.zip
+.DS_Store
+.dev.vars
+.env*
+.wrangler/
+npm-debug.log*
+pnpm-debug.log*

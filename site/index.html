@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="description"
+      content="Share the class times that work for your week and help CrossFit Bethesda shape its schedule."
+    />
+    <meta property="og:title" content="Class Time Survey | CrossFit Bethesda" />
+    <meta
+      property="og:description"
+      content="Tell us when you want to train. It takes about three minutes."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./og.png" />
+    <meta property="og:image:width" content="1730" />
+    <meta property="og:image:height" content="909" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Class Time Survey | CrossFit Bethesda" />
+    <meta
+      name="twitter:description"
+      content="Tell us when you want to train. It takes about three minutes."
+    />
+    <meta name="twitter:image" content="./og.png" />
+    <title>Class Time Survey | CrossFit Bethesda</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./config.js"></script>
+    <script src="./survey.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#survey">Skip to survey</a>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="CrossFit Bethesda class time survey home">
+        <span class="brand-mark" aria-hidden="true">CFB</span>
+        <span class="brand-name" data-gym-name>CrossFit Bethesda</span>
+      </a>
+      <span class="topbar-label">Member input · 2026</span>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Class time survey</p>
+          <h1 id="page-title">Tell us when you want to <em>train.</em></h1>
+          <p class="lede">
+            Your week has a rhythm. Help us understand it so we can evaluate a
+            class schedule that works for more of our community.
+          </p>
+          <div class="hero-facts" aria-label="Survey details">
+            <span><strong>3</strong> minutes</span>
+            <span><strong>3</strong> short steps</span>
+            <span><strong>1</strong> community</span>
+          </div>
+        </div>
+        <aside class="hero-note" aria-label="How responses will be used">
+          <span class="note-number">01</span>
+          <p>
+            We’ll compare member demand with attendance, coaching capacity, and
+            the cost of each class before changing the schedule.
+          </p>
+          <span class="note-rule" aria-hidden="true"></span>
+          <small>Input informs decisions; it does not guarantee a new class.</small>
+        </aside>
+      </section>
+
+      <section class="survey-shell" id="survey" aria-labelledby="survey-heading">
+        <div class="survey-intro">
+          <div>
+            <p class="section-kicker">Your availability</p>
+            <h2 id="survey-heading">Make your week count.</h2>
+          </div>
+          <div class="privacy-chip">
+            <span class="privacy-dot" aria-hidden="true"></span>
+            Email optional
+          </div>
+        </div>
+
+        <div class="connection-banner" id="connectionBanner" role="status" hidden>
+          <strong>Preview mode</strong>
+          <span>Submissions are disabled until response storage is connected.</span>
+        </div>
+
+        <div class="survey-card">
+          <div class="progress-wrap" aria-label="Survey progress">
+            <div class="progress-meta">
+              <span>Step <strong id="currentStep">1</strong> of 3</span>
+              <span id="progressLabel">Current schedule</span>
+            </div>
+            <div
+              class="progress-track"
+              role="progressbar"
+              aria-valuemin="1"
+              aria-valuemax="3"
+              aria-valuenow="1"
+              aria-labelledby="progressLabel"
+            >
+              <span id="progressBar"></span>
+            </div>
+          </div>
+
+          <form id="surveyForm" novalidate>
+            <div class="form-error" id="formError" role="alert" tabindex="-1" hidden></div>
+
+            <section class="form-step is-active" data-step="0" aria-labelledby="step-one-title">
+              <div class="step-heading">
+                <span class="step-index" aria-hidden="true">01</span>
+                <div>
+                  <p class="step-kicker">Your current routine</p>
+                  <h3 id="step-one-title">Which classes do you attend?</h3>
+                </div>
+              </div>
+
+              <div class="question-block">
+                <label class="field-label" for="memberName">Your name <span class="required">Required</span></label>
+                <p class="question-help" id="memberNameHelp">Please use the name gym leadership knows you by. Your answers will be saved with this name.</p>
+                <input id="memberName" name="memberName" type="text" autocomplete="name" maxlength="120" required aria-describedby="memberNameHelp" placeholder="Your name" />
+              </div>
+
+              <section class="question-block calendar-question" id="weeklyAttendanceBlock" aria-labelledby="calendar-question-title">
+                <div class="calendar-question-heading">
+                  <div>
+                    <h4 id="calendar-question-title">How often do you attend each class?</h4>
+                    <p class="question-help">
+                      Think about a typical month. All classes start as “Never / can’t.”
+                      Change only the classes you attend.
+                    </p>
+                  </div>
+                  <strong class="calendar-count" id="calendarCount" aria-live="polite">0 of 31 attending</strong>
+                </div>
+
+                <div class="attendance-key" aria-label="Attendance choices">
+                  <span data-status="regular"><i aria-hidden="true"></i>Regularly attend</span>
+                  <span data-status="sometimes"><i aria-hidden="true"></i>Sometimes attend</span>
+                  <span data-status="rarely"><i aria-hidden="true"></i>Rarely attend</span>
+                  <span data-status="never"><i aria-hidden="true"></i>Never / can’t attend</span>
+                </div>
+
+                <div class="schedule-sections" id="weekCalendar">
+                  <section class="schedule-section" aria-labelledby="work-week-title">
+                    <h5 id="work-week-title">Work week schedule</h5>
+                    <div class="weekday-shortcuts" role="group" aria-labelledby="current-shortcuts-title">
+                      <h6 id="current-shortcuts-title">Set all weekdays at a time</h6>
+                      <p>Choose once to update every weekday class at that time. You can still adjust individual classes below.</p>
+                      <div class="weekday-time-controls" data-weekday-time-controls></div>
+                    </div>
+                    <p class="calendar-scroll-note">Swipe or scroll sideways to see all weekdays.</p>
+                    <div class="week-calendar work-week-calendar" id="workWeekCalendar" aria-label="Monday through Friday CrossFit classes"></div>
+                  </section>
+                  <section class="schedule-section" aria-labelledby="weekend-title">
+                    <h5 id="weekend-title">Weekend schedule</h5>
+                    <p class="calendar-scroll-note">Swipe or scroll sideways to see both weekend days.</p>
+                    <div class="week-calendar weekend-calendar" id="weekendCalendar" aria-label="Saturday and Sunday CrossFit classes"></div>
+                  </section>
+                </div>
+                <p class="calendar-source">
+                  Schedule snapshot: Wodify Classes API, September 14–20, 2026 · CrossFit program.
+                </p>
+              </section>
+
+              <div class="form-actions align-end">
+                <button class="button button-primary" type="button" data-next>
+                  Review proposed schedule <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="form-step" data-step="1" aria-labelledby="step-two-title" hidden>
+              <div class="step-heading">
+                <span class="step-index" aria-hidden="true">02</span>
+                <div>
+                  <p class="step-kicker">Imagine a typical week</p>
+                  <h3 id="step-two-title">If we moved to this schedule, which classes would you attend?</h3>
+                </div>
+              </div>
+
+              <section class="question-block calendar-question" id="proposedAttendanceBlock" aria-labelledby="proposed-question-title">
+                <div class="calendar-question-heading">
+                  <div>
+                    <h4 id="proposed-question-title">How often would you attend each proposed class?</h4>
+                    <p class="question-help">
+                      Think about your work, commute, family, and recovery needs in a typical month.
+                      All classes start as “Never / can’t.” Change only the classes you would realistically attend.
+                      This schedule is a proposal for your feedback.
+                    </p>
+                  </div>
+                  <strong class="calendar-count" id="proposedCalendarCount" aria-live="polite">0 of 44 attending</strong>
+                </div>
+
+                <div class="attendance-key" aria-label="Proposed attendance choices">
+                  <span data-status="regular"><i aria-hidden="true"></i>Would regularly attend</span>
+                  <span data-status="sometimes"><i aria-hidden="true"></i>Would sometimes attend</span>
+                  <span data-status="rarely"><i aria-hidden="true"></i>Would rarely attend</span>
+                  <span data-status="never"><i aria-hidden="true"></i>Would never / cannot attend</span>
+                </div>
+
+                <div class="schedule-sections" id="proposedCalendar">
+                  <section class="schedule-section" aria-labelledby="proposed-work-week-title">
+                    <h5 id="proposed-work-week-title">Work week schedule</h5>
+                    <div class="weekday-shortcuts" role="group" aria-labelledby="proposed-shortcuts-title">
+                      <h6 id="proposed-shortcuts-title">Set all weekdays at a time</h6>
+                      <p>Choose once to update every weekday class at that time. You can still adjust individual classes below.</p>
+                      <div class="weekday-time-controls" data-weekday-time-controls></div>
+                    </div>
+                    <p class="calendar-scroll-note">Swipe or scroll sideways to see all weekdays.</p>
+                    <div class="week-calendar work-week-calendar" aria-label="Proposed Monday through Friday CrossFit classes"></div>
+                  </section>
+                  <section class="schedule-section" aria-labelledby="proposed-weekend-title">
+                    <h5 id="proposed-weekend-title">Weekend schedule</h5>
+                    <p class="calendar-scroll-note">Swipe or scroll sideways to see both weekend days.</p>
+                    <div class="week-calendar weekend-calendar" aria-label="Proposed Saturday and Sunday CrossFit classes"></div>
+                  </section>
+                </div>
+              </section>
+
+              <div class="form-actions">
+                <button class="button button-secondary" type="button" data-back>
+                  <span aria-hidden="true">←</span> Back
+                </button>
+                <button class="button button-primary" type="button" data-next>
+                  Last step <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </section>
+
+            <section class="form-step" data-step="2" aria-labelledby="step-three-title" hidden>
+              <div class="step-heading">
+                <span class="step-index" aria-hidden="true">03</span>
+                <div>
+                  <p class="step-kicker">One final check</p>
+                  <h3 id="step-three-title">What else should we understand?</h3>
+                </div>
+              </div>
+
+              <div class="attendance-comparison" aria-label="Your regular attendance choices" aria-live="polite">
+                <div class="choice-summary">
+                  <span>Current schedule · marked regular</span>
+                  <strong id="currentRegularCount">0 classes</strong>
+                </div>
+                <div class="choice-summary">
+                  <span>Proposed schedule · marked regular</span>
+                  <strong id="proposedRegularCount">0 classes</strong>
+                </div>
+              </div>
+
+              <fieldset class="question-block">
+                <legend>What most often gets in the way of getting to the gym?</legend>
+                <p class="question-help">Select all that apply. This question is optional.</p>
+                <div class="check-list">
+                  <label><input type="checkbox" name="barriers" value="work" /><span>Work schedule</span></label>
+                  <label><input type="checkbox" name="barriers" value="school" /><span>School schedule</span></label>
+                  <label><input type="checkbox" name="barriers" value="childcare" /><span>Childcare or family care</span></label>
+                  <label><input type="checkbox" name="barriers" value="commute" /><span>Commute or traffic</span></label>
+                  <label><input type="checkbox" name="barriers" value="class-full" /><span>Preferred class is full</span></label>
+                  <label><input type="checkbox" name="barriers" value="recovery" /><span>Recovery or rest-day needs</span></label>
+                  <label><input type="checkbox" name="barriers" value="none" /><span>No consistent barrier</span></label>
+                  <label><input type="checkbox" name="barriers" value="other" /><span>Something else</span></label>
+                </div>
+              </fieldset>
+
+              <div class="question-block">
+                <label class="field-label" for="comments">Anything else you want us to know?</label>
+                <textarea
+                  id="comments"
+                  name="comments"
+                  maxlength="1000"
+                  rows="5"
+                  placeholder="Tell us how the proposed schedule would affect your training, or suggest a time that would work better."
+                ></textarea>
+                <div class="character-count"><span id="commentCount">0</span>/1000</div>
+              </div>
+
+              <div class="question-block contact-block">
+                <div>
+                  <label class="field-label" for="email">Email for a follow-up <span class="optional">Optional</span></label>
+                  <p class="question-help">Leave this blank if you don’t want an email follow-up.</p>
+                </div>
+                <input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" />
+                <label class="consent-row" id="consentRow" hidden>
+                  <input type="checkbox" name="contactConsent" value="yes" />
+                  <span>I’m okay with gym leadership contacting me about this response.</span>
+                </label>
+              </div>
+
+              <div class="honeypot" aria-hidden="true">
+                <label for="website">Website</label>
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <div id="turnstileMount" class="turnstile-wrap"></div>
+
+              <p class="submission-note">
+                Your name and answers are stored together for schedule planning and reviewed
+                only by gym leadership. Email is optional.
+              </p>
+
+              <div class="form-actions">
+                <button class="button button-secondary" type="button" data-back>
+                  <span aria-hidden="true">←</span> Back
+                </button>
+                <button class="button button-primary submit-button" id="submitButton" type="submit">
+                  <span class="submit-label">Submit my response</span>
+                  <span class="submit-loading" hidden>Sending…</span>
+                </button>
+              </div>
+            </section>
+          </form>
+
+          <section class="success-state" id="successState" hidden tabindex="-1" aria-labelledby="success-title">
+            <span class="success-mark" aria-hidden="true">✓</span>
+            <p class="section-kicker">Response received</p>
+            <h3 id="success-title">Thanks for helping shape the schedule.</h3>
+            <p>
+              Your input is now part of the picture. We’ll consider member demand alongside
+              attendance, coaching capacity, and financial viability before making changes.
+            </p>
+            <button class="button button-secondary" id="resetSurvey" type="button">Submit another response</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="process" aria-labelledby="process-title">
+        <p class="section-kicker">What happens next</p>
+        <h2 id="process-title">Input becomes evidence.</h2>
+        <div class="process-grid">
+          <article>
+            <span>01</span>
+            <h3>Collect</h3>
+            <p>We gather realistic availability and identify the strongest recurring demand.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Compare</h3>
+            <p>We compare responses with current attendance, capacity, coaching, and cost.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Test</h3>
+            <p>Promising changes can begin as a measured trial before becoming permanent.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">
+        <span class="brand-mark inverse" aria-hidden="true">CFB</span>
+        <span data-gym-name>CrossFit Bethesda</span>
+      </div>
+      <p>Built for better training weeks.</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
